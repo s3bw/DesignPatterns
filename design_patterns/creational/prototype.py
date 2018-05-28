@@ -55,7 +55,7 @@ Consequences
 # Abstract Prototype
 class WeaponType:
 
-    name = 'n iron'
+    name = 'iron'
     rarity = "common"
 
     def clone(self, **attrs):
@@ -117,25 +117,25 @@ def main():
     default_weapons = prototype_weapons.clone()
     registry.register_object(default_weapons.name, default_weapons)
 
-    wood_weapons = prototype_weapons.clone(name=" wood", rarity="uncommon")
+    wood_weapons = prototype_weapons.clone(name="wood", rarity="uncommon")
     registry.register_object(wood_weapons.name, wood_weapons)
 
-    steel_weapons = prototype_weapons.clone(name=" steel", rarity="rare")
+    steel_weapons = prototype_weapons.clone(name="steel", rarity="rare")
     registry.register_object(steel_weapons.name, steel_weapons)
 
-    stone_weapons = prototype_weapons.clone(name=" stone")
+    stone_weapons = prototype_weapons.clone(name="stone")
     registry.register_object(stone_weapons.name, stone_weapons)
 
     diamond_weapons = prototype_weapons.clone(
-        name=" diamond",
+        name="diamond",
         rarity="godlike",
         prob=0.005
     )
     registry.register_object(diamond_weapons.name, diamond_weapons)
 
     for weapon_type, weapon in registry.get_objects().items():
-        print("A{} weapon is {} you have {}% chance of finding one.".format(
-            weapon_type,
+        print("{} weapons are {} you have {}% chance of finding one.".format(
+            weapon_type.capitalize(),
             weapon.rarity,
             weapon.prob,
             )
