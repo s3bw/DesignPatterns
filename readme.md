@@ -5,6 +5,11 @@ This repo is intended to be used as practice for implementing patterns of design
  - **For theory see:** Design Patterns: Elements of Reusable Object-Oriented Software.
  - **For examples see:** [faif/python-patterns](https://github.com/faif/python-patterns)
 
+## Design Principles:
+
+ - Program to an interface, not an implementation
+ - Favour object composition over class inheritance.
+
 ## Creational Patterns
 
 (Chapter 3, page. 77)
