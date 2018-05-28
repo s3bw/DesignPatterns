@@ -68,6 +68,7 @@ class WeaponType:
     def determine_probability(self, obj):
         """ Calculate the probability of finding a weapon according
         to it's rarity.
+        This assumes every weapon type should have a probability.
         """
         if obj.rarity == "common":
             return 0.8
@@ -77,7 +78,7 @@ class WeaponType:
             return 0.05
 
         if not hasattr(obj, "prob"):
-            raise KeyError("Rarity not defined, please specify prob")
+            raise KeyError("Rarity not defined, please provide a prob")
         else:
             return obj.prob
 
@@ -128,7 +129,8 @@ def main():
     diamond_weapons = prototype_weapons.clone(
         name=" diamond",
         rarity="godlike",
-        prob=0.005)
+        prob=0.005
+    )
     registry.register_object(diamond_weapons.name, diamond_weapons)
 
     for weapon_type, weapon in registry.get_objects().items():
