@@ -56,14 +56,33 @@ Consequences
 class WeaponType:
 
     name = 'n iron'
+    rarity = "common"
 
     def clone(self, **attrs):
         obj = self.__class__()
         obj.__dict__.update(attrs)
+        obj.prob = self.determine_probability(obj)
         return obj
 
+    @classmethod
+    def determine_probability(self, obj):
+        """ Calculate the probability of finding a weapon according
+        to it's rarity.
+        """
+        if obj.rarity == "common":
+            return 0.8
+        if obj.rarity == "uncommon":
+            return 0.4
+        if obj.rarity == "rare":
+            return 0.05
 
-class PrototypeRegistry:
+        if not hasattr(obj, "prob"):
+            raise KeyError("Rarity not defined, please specify prob")
+        else:
+            return obj.prob
+
+
+class TypeRegistry:
     """ aka Dispatcher, aka Manager.
     When the number of prototypes in a system isn't fixed, keep a registry of
     available prototypes. Clients won't manage prototypes themselves by will
@@ -88,13 +107,13 @@ class PrototypeRegistry:
 
 def main():
     # Prototype Manager
-    registry = PrototypeRegistry()
+    registry = TypeRegistry()
 
     # Abstract Prototype
     prototype_weapons = WeaponType()
 
     # Concrete Prototypes
-    default_weapons = prototype_weapons.clone(rarity="common")
+    default_weapons = prototype_weapons.clone()
     registry.register_object(default_weapons.name, default_weapons)
 
     wood_weapons = prototype_weapons.clone(name=" wood", rarity="uncommon")
@@ -103,8 +122,22 @@ def main():
     steel_weapons = prototype_weapons.clone(name=" steel", rarity="rare")
     registry.register_object(steel_weapons.name, steel_weapons)
 
+    stone_weapons = prototype_weapons.clone(name=" stone")
+    registry.register_object(stone_weapons.name, stone_weapons)
+
+    diamond_weapons = prototype_weapons.clone(
+        name=" diamond",
+        rarity="godlike",
+        prob=0.005)
+    registry.register_object(diamond_weapons.name, diamond_weapons)
+
     for weapon_type, weapon in registry.get_objects().items():
-        print("A{} weapon is {}".format(weapon_type, weapon.rarity))
+        print("A{} weapon is {} you have {}% chance of finding one.".format(
+            weapon_type,
+            weapon.rarity,
+            weapon.prob,
+            )
+        )
 
 
 if __name__ == "__main__":
