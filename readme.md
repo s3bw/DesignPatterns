@@ -34,3 +34,24 @@ Sometimes creational patterns are competitors, at other times they are complemen
  - [Factory Method](design_patterns/creational/factory_method.py)
  - [Prototype](design_patterns/creational/prototype.py)
  - [Singleton](design_patterns/creational/singleton.py)
+
+## Structural Patterns
+
+(Chapter 4, page. 133)
+
+### Summary
+
+Structural patterns are concerned with how classes and objects are composed to form larger structures. Structural class patterns use inheritance to compose interfaces or implementations.
+Rather than composing interfaces or implementations, structural object patterns describe ways to compose objects to realize new functionality. The added flexibility of object composition comes from the ability to change the composition at run-time, which is impossible with static class composition.
+
+Many structural patterns are related to some degree.
+
+### See following implementations:
+
+ - [Adapter](design_patterns/structural/adapter.py)
+ - [Bridge](design_patterns/structural/bridge.py)
+ - [Composite](design_patterns/structural/composite.py)
+ - [Decorator](design_patterns/structural/decorator.py)
+ - [Facade](design_patterns/structural/facade.py)
+ - [Flyweight](design_patterns/structural/flyweight.py)
+ - [Proxy](design_patterns/structural/proxy.py)
