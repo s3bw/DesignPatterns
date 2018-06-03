@@ -55,3 +55,31 @@ Many structural patterns are related to some degree.
  - [Facade](design_patterns/structural/facade.py)
  - [Flyweight](design_patterns/structural/flyweight.py)
  - [Proxy](design_patterns/structural/proxy.py)
+
+## Behavioral Patterns
+
+(Chapter 5, page. 215)
+
+### Summary
+
+Behavioral patterns are concerned with algorithms and the assignment of responsibilities between objects. Behavioral patterns describe not just patterns of objects or classes but also the patterns of communication between them. These patterns characterize complex control flow that's difficult to follow at run-time. They shift your focus away from flow of control to let you concentrate just on the way objects are interconnected.
+
+Behavioral class patterns use inheritance to distribute behaviour between classes.
+
+Behavioral object patterns use object composition rather than inheritance.
+
+Other behavioral object patterns are concerned with encapsulating behavior in an object and delegating requests to it.
+
+### See following implementations:
+
+ - [Chain Of Responsibility](design_patterns/behavioral/chain_of_responsibility.py)
+ - [Command](design_patterns/behavioral/command.py)
+ - [Interpreter](design_patterns/behavioral/interpreter.py)
+ - [Iterator](design_patterns/behavioral/iterator.py)
+ - [Mediator](design_patterns/behavioral/mediator.py)
+ - [Memento](design_patterns/behavioral/memento.py)
+ - [Observer](design_patterns/behavioral/observer.py)
+ - [State](design_patterns/behavioral/state.py)
+ - [Strategy](design_patterns/behavioral/strategy.py)
+ - [Template Method](design_patterns/behavioral/template_method.py)
+ - [Visitor](design_patterns/behavioral/visitor.py)
