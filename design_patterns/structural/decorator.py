@@ -46,7 +46,7 @@ Consequences
 # object without changing its implementation.
 
 class Elf:
-    """Base text tag"""
+    """Base character"""
     def __init__(self, name, hp, strength):
         self._name = name
         self._hp = hp
@@ -64,7 +64,7 @@ class Elf:
 
 
 class KnightPromotion(Elf):
-    """Wraps a tag in <b>"""
+    """Gives a character the knight promotion"""
     def __init__(self, wrapped):
         self._wrapped = wrapped
 
