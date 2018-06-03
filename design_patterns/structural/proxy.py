@@ -44,29 +44,42 @@ Consequences
 import time
 
 
-class SalesManager:
-    def talk(self):
-        print("Sales Manager is ready to talk")
+class Elf:
+    def __init__(self, name, strength):
+        self.name = name
+        self.strength = strength
 
 
-class Proxy:
-    def __init__(self):
-        self.busy = 'No'
-        self.sales = None
+class Chest:
+    def __init__(self, name, contents, lock_level):
+        self.name = name
+        self.lock_level = lock_level
+        self.contents = contents
 
-    def talk(self):
-        print("Proxy checking for Sales Manager availability")
-        if self.busy == 'No':
-            self.sales = SalesManager()
-            time.sleep(0.1)
-            self.sales.talk()
-        else:
-            time.sleep(0.1)
-            print("Sales Manager is busy")
+    def show_contents(self):
+        print("{} contains the following:".format(self.name))
+        for index, content in enumerate(self.contents):
+            print("{}. {}".format(index, content))
+
+
+# Protection proxy
+def access_chest(creature, chest):
+    """ In the Proxy pattern, the subject defines the key functionality,
+        and the proxy provides (or refuses) access to it.
+    """
+    if creature.strength >= chest.lock_level:
+        print("{} Opened!".format(chest.name))
+        chest.show_contents()
+    else:
+        print("Can't open {}".format(chest.name))
+        print("{} doesn't have high enough strength!".format(creature.name))
 
 
 if __name__ == '__main__':
-    p = Proxy()
-    p.talk()
-    p.busy = 'Yes'
-    p.talk()
+    wooden_chest = Chest("wooden chest", ["hammer"], 3)
+    iron_chest = Chest("iron chest", ["diamond"], 10)
+    elron = Elf("elron", 8)
+
+    access_chest(elron, wooden_chest)
+    print("")
+    access_chest(elron, iron_chest)
