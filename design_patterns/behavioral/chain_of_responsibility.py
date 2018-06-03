@@ -59,11 +59,13 @@ from abc import abstractmethod
 class Spell:
     def __init__(self, name):
         self.name = name
-        self.chain =  ConcreteHandler(
-                        ConcreteHandler2(
-                        ConcreteHandler3(
-                        ConcreteHandler4()))
-                      )
+        self.chain = ConcreteHandler1(
+            ConcreteHandler2(
+                ConcreteHandler3(
+                    ConcreteHandler4()
+                )
+            )
+        )
 
     def cast(self, creature):
         self.chain.handle(creature)
@@ -79,13 +81,13 @@ class Magician:
         spell.cast(self)
 
 
-class SpellHandler(ABC):
+class AbstractHandler(ABC):
     def __init__(self, successor=None):
         self._successor = successor
 
     def handle(self, creature):
-        spe = self._handle(creature)
-        if not spe:
+        reaction = self._handle(creature)
+        if not reaction:
             self._successor.handle(creature)
 
     @abstractmethod
@@ -93,28 +95,28 @@ class SpellHandler(ABC):
         raise NotImplementedError("Must provide implementation in subclass")
 
 
-class ConcreteHandler(SpellHandler):
+class ConcreteHandler1(AbstractHandler):
     def _handle(self, creature):
         if creature.intelligence < 10:
             print("Spell backfires")
             return True
 
 
-class ConcreteHandler2(SpellHandler):
+class ConcreteHandler2(AbstractHandler):
     def _handle(self, creature):
         if creature.intelligence < 20:
             print("Small fire ball is cast")
             return True
 
 
-class ConcreteHandler3(SpellHandler):
+class ConcreteHandler3(AbstractHandler):
     def _handle(self, creature):
         if creature.intelligence < 30:
             print("A fire ball blazes across the room")
             return True
 
 
-class ConcreteHandler4(SpellHandler):
+class ConcreteHandler4(AbstractHandler):
     def _handle(self, creature):
         print("A Massive column of fire burns through the wall!")
         return True
