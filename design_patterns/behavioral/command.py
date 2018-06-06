@@ -83,43 +83,64 @@ import os
 from os.path import lexists
 
 
-class MoveFileCommand:
-    def __init__(self, src, dest):
-        self.src = src
-        self.dest = dest
+class Wizard:
 
-    def execute(self):
-        self.rename(self.src, self.dest)
+    def __init__(self, name, x, y):
+        self._name = name
+        self._x = x
+        self._y = y
+
+    def move(self, co_ords):
+        dx, dy = co_ords
+        self._x += dx
+        self._y += dy
+        print(self._name, "moved to {}, {}".format(self._x, self._y))
+
+    def at_origin(self):
+        if self._x == 0 and self._y == 0:
+            print(self._name, "is at origin.")
+        else:
+            print(self._name, "is not at origin.")
+
+
+class MoveCommand:
+
+    direction = {'left': [-1, 0],
+                 'right': [+1, 0],
+                 'up': [0, +1],
+                 'down': [0, -1]}
+
+    def __init__(self, creature, dest):
+        self._creature = creature
+        self._movement = self.direction[dest]
 
     def undo(self):
-        self.rename(self.dest, self.src)
+        self._movement = [i*-1 for i in self._movement]
+        self._creature.move(self._movement)
 
-    def rename(self, src, dest):
-        print("renaming %s to %s" % (src, dest))
-        os.rename(src, dest)
+    def execute(self):
+        self._creature.move(self._movement)
 
 
 def main():
     command_stack = []
 
-    command_stack.append(MoveFileCommand('foo.txt', 'bar.txt'))
-    command_stack.append(MoveFileCommand('bar.txt', 'baz.txt'))
+    wizard = Wizard('Gandalf', 0, 0)
 
-    assert(not lexists("foo.txt"))
-    assert(not lexists("bar.txt"))
-    assert(not lexists("baz.txt"))
-    try:
-        with open("foo.txt", "w"):
-            pass
+    command_stack.append(MoveCommand(wizard, 'up'))
+    command_stack.append(MoveCommand(wizard, 'up'))
+    command_stack.append(MoveCommand(wizard, 'up'))
+    command_stack.append(MoveCommand(wizard, 'right'))
+    command_stack.append(MoveCommand(wizard, 'right'))
 
-        for cmd in command_stack:
-            cmd.execute()
+    wizard.at_origin()
+    for cmd in command_stack:
+        cmd.execute()
+    wizard.at_origin()
 
-        for cmd in reversed(command_stack):
-            cmd.undo()
-
-    finally:
-        os.unlink("foo.txt")
+    for cmd in reversed(command_stack):
+        cmd.undo()
+    wizard.at_origin()
 
 
 if __name__ == "__main__":
