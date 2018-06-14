@@ -75,7 +75,7 @@ Other behavioral object patterns are concerned with encapsulating behavior in an
  - [Chain Of Responsibility](design_patterns/behavioral/chain_of_responsibility.py)
  - [Command](design_patterns/behavioral/command.py)
  - [Interpreter](design_patterns/behavioral/interpreter.py)
- - [Iterator](design_patterns/behavioral/iterator.py)
+ - [Iterator](design_patterns/behavioral/iterator.py) Additional: [Tree Iteration](design_patterns/behavioral/tree_iterator.py)
  - [Mediator](design_patterns/behavioral/mediator.py)
  - [Memento](design_patterns/behavioral/memento.py)
  - [Observer](design_patterns/behavioral/observer.py)
