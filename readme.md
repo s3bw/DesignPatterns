@@ -18,6 +18,11 @@ This repo is intended to be used as practice for implementing patterns of design
 An extension to the original gang-of-four design patterns. Some of these are unique
 to the python language.
 
+### See following implementations:
+
+ - [Pre-bound Methods](design_patterns/python/prebound_methods.py)
+ - [Sentinel Objects](design_patterns/python/sentinel_object.py)
+
 ## Creational Patterns
 
 (Chapter 3, page. 77)
