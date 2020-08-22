@@ -3,6 +3,10 @@ For python stdlib examples see logging modules NullHander,
 or the functools.lru_cache 'sentinel' for signalling cache
 misses.
 
+This pattern is also used to solve programs plagued by
+Semipredicate problems see:
+https://en.wikipedia.org/wiki/Semipredicate_problem
+
 Intent
 ------
 Separate the identity and value of an object to recognize
@@ -11,14 +15,14 @@ it's significance.
 Motivation
 ----------
 On a few occasions programmers might want to distinguish
-the difference between data being missing and the data
-indicating that it does not exist.
+the difference between missing data that could exist and
+data that definitely does not exist.
 
 For example, I might have a collection of users and their
 associated addresses. If a user has not provided their
 address we can represent that with None. But if we have
 a vagabond user we have no way to distinguish them from
-users that haven't provided their address.
+the users that haven't yet provided an address.
 
 Extending summaries for vagabonds and missing addresses
 can be tallied as if they were normal address objects.
@@ -30,8 +34,8 @@ the user has passed 'None' to the method.
 Applicability
 -------------
 Use the sentinel object pattern:
- - When None value will not cut it for differentiating two
-   identities of None. (Vagabond and Non-yet-supplied).
+ - When None will not cut it for differentiating two
+   identities of None. (Vagabond and Not-Yet-Supplied).
  - To improve readability of statements from 'if x is None'
    to 'if x is VAGABOND'.
  - Type consistency
